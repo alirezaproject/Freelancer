@@ -52,6 +52,11 @@ export default {
       fontFamily: {
         sans: ["Vazir", ...fontFamily.sans],
       },
+      plugins: [
+        require("@tailwindcss/forms")({
+          strategy: "class", // only generate classes
+        }),
+      ],
     },
   },
 };
