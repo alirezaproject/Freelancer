@@ -8,6 +8,8 @@ import { TbPencilMinus } from "react-icons/tb";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useRemoveProject from "./useRemoveProject";
+import CreateProjectForm from "./CreateProjectForm";
+import ToggleProjectStatus from "./ToggleProjectStatus,";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -32,17 +34,18 @@ function ProjectRow({ project, index }) {
       </td>
       <td>{project.freelancer?.name || "-"}</td>
       <td>
-        {project.status === "OPEN" ? (
+        <ToggleProjectStatus project={project} />
+        {/* {project.status === "OPEN" ? (
           <span className="badge badge--success">باز</span>
         ) : (
           <span className="badge badge--danger">بسته</span>
-        )}
+        )} */}
       </td>
       <td>
         <div className="flex items-center gap-x-4">
           <>
             <button onClick={() => setIsEditOpen(true)}>
-              <TbPencilMinus className="h-5 w-5 text-error" />
+              <TbPencilMinus className="h-5 w-5 text-primary-900" />
             </button>
 
             <Modal
@@ -50,12 +53,15 @@ function ProjectRow({ project, index }) {
               title={`ویرایش ${project.title}`}
               onClose={() => setIsEditOpen(false)}
             >
-              this is modal ...
+              <CreateProjectForm
+                projectToEdit={project}
+                onClose={() => setIsEditOpen(false)}
+              />
             </Modal>
           </>
           <>
             <button onClick={() => setIsDeleteOpen(true)}>
-              <HiOutlineTrash className="h-5 w-5 text-primary-900" />
+              <HiOutlineTrash className="h-5 w-5 text-error" />
             </button>
             <Modal
               open={isDeleteOpen}
