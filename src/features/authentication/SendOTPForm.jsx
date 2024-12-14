@@ -8,7 +8,7 @@ function SendOTPForm({ onSubmit, isPending, register }) {
     <div>
       <form className="space-y-8" onSubmit={onSubmit}>
         <TextField
-          name="phoneNumber"
+          name="phone"
           label="شماره موبایل"
           register={register}
         />

@@ -6,8 +6,8 @@ export default function useEditProject() {
   const queryClient = useQueryClient();
   const { mutate: editProject, isPending: isEditing } = useMutation({
     mutationFn: editProjectApi,
-    onSuccess: () => {
-      toast.success("پروژه با موفقیت ویرایش شد");
+    onSuccess: (data) => {
+      toast.success(data.message);
       queryClient.invalidateQueries({ queryKey: ["owner-projects"] });
     },
     onError: (err) => toast.error(err?.response.data.message),
