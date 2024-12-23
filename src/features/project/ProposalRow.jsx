@@ -31,7 +31,7 @@ function ProposalRow({ proposal, index }) {
       </td>
       <td>{proposal.duration} روز</td>
       <td>{proposal.price}</td>
-      <td>{proposal.status}</td>
+
       <td>
         <span className={`badge ${statusStyle[status].className}`}>
           {statusStyle[status].label}

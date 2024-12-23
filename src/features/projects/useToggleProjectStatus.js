@@ -12,6 +12,8 @@ export default function useToggleProjectStatus() {
     },
     onError: (err) => toast.error(err?.response.data.message),
   });
+  console.log(toggleProjectStatus);
+
 
   return { toggleProjectStatus, isUpdating };
 }

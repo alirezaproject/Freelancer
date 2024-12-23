@@ -9,7 +9,11 @@ export default function useProposals() {
 
     });
 
+
+
+
     const { proposals } = data || {};
-    
+  
+
     return { isLoading, proposals };
 }

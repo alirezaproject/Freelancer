@@ -6,14 +6,15 @@ import useProposals from '../proposal/useProposals';
 import DashboardHeader from '../../ui/DashboardHeader';
 
 function DashboardLayout() {
-    const { isLoading, projects } = useProposals();
+    const { isLoading, proposals } = useProposals();
+
 
     if (isLoading) return <Loading />;
 
     return (
         <>
             <DashboardHeader />
-            <Stats projects={projects} />
+            <Stats proposals={proposals} />
         </>
     )
 }

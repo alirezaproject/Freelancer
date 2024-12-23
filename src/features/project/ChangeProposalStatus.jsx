@@ -11,34 +11,39 @@ const options = [
     value: 0,
   },
   {
-    label: "در انتضار تایید",
+    label: "در انتظار تایید",
     value: 1,
   },
   {
-    label: "تایی شده",
+    label: "تایید شده",
     value: 2,
   },
 ];
+
 function ChangeProposalStatus({ proposalId, onClose }) {
-  const { projectId } = useParams();
-  const { register, handleSubmit } = useForm();
+  const { id: projectId } = useParams();
+  const { register, handleSubmit, } = useForm();
   const { changeProposalStatus, isUpdating } = useChangeProposalStatus();
   const queryClient = useQueryClient();
-
+     
+ 
   const onSubmit = (data) => {
+
+
     changeProposalStatus(
-      { id: proposalId, data },
+      { proposalId, projectId, ...data },
       {
         onSuccess: () => {
           onClose();
-          queryClient.invalidateQueries({ queryKey: "project", projectId });
+          queryClient.invalidateQueries({ queryKey: ["project", projectId] });
+
         },
       },
     );
   };
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <RHFSelect
           name="status"
           label="تغییر وضعیت درخواست"
