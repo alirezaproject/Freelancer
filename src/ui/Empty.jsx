@@ -1,6 +1,6 @@
 import React from "react";
 
-function Empty() {
+function Empty({ resourceName }) {
   return <div>Empty</div>;
 }
 

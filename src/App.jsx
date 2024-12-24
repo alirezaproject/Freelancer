@@ -15,6 +15,10 @@ import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import AdminLayout from "./features/admin/AdminLayout";
+import AdminDashboard from "./pages/AdminDashboard";
+import Users from "./pages/Users";
 
 const queryClient = new QueryClient();
 function App() {
@@ -24,25 +28,50 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
         <Toaster />
         <Routes>
-          <Route path="/owner" element={<OwnerLayout />}>
+
+          <Route path="/owner" element={
+            <ProtectedRoute>
+              <OwnerLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<OwnerDashboard />} />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:id" element={<Project />} />
           </Route>
+
           <Route path="/auth" element={<Auth />} />
           <Route path="/complete-profile" element={<CompleteProfile />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="freelancer" element={<FreelancerLayout />}>
+
+
+          <Route path="freelancer" element={
+            <ProtectedRoute>
+              <FreelancerLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<FreelancerDashboard />} />
             <Route path="proposals" element={<Proposals />} />
             <Route path="projects" element={<SubmittedProjects />} />
           </Route>
+
+          <Route path="admin" element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="proposals" element={<Proposals />} />
+            <Route path="projects" element={<SubmittedProjects />} />
+          </Route>
+
         </Routes>
-      </QueryClientProvider>
-    </DarkModeProvider>
+      </QueryClientProvider >
+    </DarkModeProvider >
   );
 }
 
